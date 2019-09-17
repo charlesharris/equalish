@@ -1,8 +1,6 @@
 class CanonicalAthenaInsurance
   include ::Equalish::Models::Canonical
 
-  #equalish_comparison_method ::Equalish::ComparisonMethods.Binary
-
   canonicalize :plan_id, 'Athena Health' do
     ['Athena Silver Pro', 'Some Other Athena Plan', 'Yet Another Athena Plan']
   end
