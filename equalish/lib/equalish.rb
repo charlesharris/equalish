@@ -1,6 +1,6 @@
-require "equalish/version"
+require 'equalish/version'
+require 'equalish/models/canonical'
 
 module Equalish
   class Error < StandardError; end
-  # Your code goes here...
 end
