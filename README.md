@@ -1,16 +1,32 @@
 # equalish
 
-TODO:
-* Parse incoming JSON into objects
-* Compare objects against canonical model
-* Should support multiple input schemas, potentially with multiple versions in each schema, that all match the canonical
- object, and thus each other.
+## Equalish is a gem that allows you to define certain fields on objects as "canonical", along with an array of data that is considered equivalent to the canonical object's data for that field.
 
-Considerations:
-* Allow canonical model to specify some fields as optional?
-* Should be easy to add/handle new sources, new schemas.
-* Should (attempt) to support multiple versions of a given source's schema (is there even a difference between 
- SomeSchema-v1 vs SomeSchema-v2, and SomeSchema-v1 cs DifferentSchema-v1?)
-* Support for multiple approaches to matching, e.g. binary (matches or doesn't), fuzzy? (considered equal if some
- threshold of rules match? not sure this would be useful, but maybe?)
-* Elasticsearch... what's there that we can use?
+## Example
+
+```
+class SomeCanonicalModel
+  extends ::Equalish::Models::Canonical
+
+  canonicalize :some_field, "canonical data string" do
+    ['this is acceptable', 'this is also acceptable']
+  end
+end
+
+class MyOtherModel
+  attr_accessor :some_field
+  
+  def initialize(some_field:)
+    @some_field = some_field
+  end
+end
+
+equivocal_model = MyOtherModel.new(some_field: 'this is acceptable')
+not_equivocal = MyOtherModel.new(some_field: 'totally not acceptable'')
+
+#returns true
+SomeCanonicalModel.is_canonical_for?(equivocal)
+
+#returns false
+SomeCanonicalModel.is_canonical_for?(not_equivocal)
+```
