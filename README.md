@@ -1,6 +1,29 @@
 # equalish
 Equalish is a gem that allows you to define certain fields on objects as "canonical", along with an array of data that is considered equivalent to the canonical object's data for that field.
 
+## Installing
+* Clone this repo
+* `cd equalish`
+* `bundle install`
+
+## Tests
+```
+┌─[charris@Hephaestus2] - [~/src/equalish] - [Tue Sep 17, 06:37]
+└─[$] <git:(master)> cd equalish
+┌─[charris@Hephaestus2] - [~/src/equalish/equalish] - [Tue Sep 17, 06:37]
+└─[$] <git:(master)> rake test
+Run options: --seed 38679
+
+# Running:
+
+...
+
+Finished in 0.000744s, 4032.2906 runs/s, 2688.1937 assertions/s.
+
+3 runs, 2 assertions, 0 failures, 0 errors, 0 skips
+```
+
+
 ## Example
 
 ```
