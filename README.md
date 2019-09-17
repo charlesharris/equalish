@@ -1,6 +1,5 @@
 # equalish
-
-## Equalish is a gem that allows you to define certain fields on objects as "canonical", along with an array of data that is considered equivalent to the canonical object's data for that field.
+Equalish is a gem that allows you to define certain fields on objects as "canonical", along with an array of data that is considered equivalent to the canonical object's data for that field.
 
 ## Example
 
