@@ -3,29 +3,24 @@ module Equalish
     module Canonical
 
       module ClassMethods
-        attr_accessor :canonical_fields
-        attr_accessor :normalized_data
+        attr_accessor :canonicalized
+        def init_canonical
+          @canonicalized = Hash.new
+        end
 
         def equalish_comparison_method(comparison_method)
           @comparison_method = comparison_method
         end
 
-        def canonicalize(canonical_field, equivocal_fields)
-          @canonical_fields = Hash.new if @canonical_fields.nil?
-          @normalized_data = Hash.new if @normalized_data.nil? 
-
-          @canonical_fields[canonical_field] = [canonical_field, equivocal_fields].flatten
-          @normalized_data[canonical_field] = yield
-
-          puts @canonical_fields.inspect
-          puts @normalized_data.inspect
+        def canonicalize(canonical_field, canonical_data)
+          equivalent_data = yield || []
+          @canonicalized[canonical_field.to_sym] = equivalent_data.append(canonical_data)
         end
       end
 
       def self.included(klass)
-        @canonical_fields = {}
-        @normalized_data = {}
         klass.extend ClassMethods
+        klass.init_canonical
       end
     end
   end
