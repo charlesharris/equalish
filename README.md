@@ -47,7 +47,7 @@ equivocal_model = MyOtherModel.new(some_field: 'this is acceptable')
 not_equivocal = MyOtherModel.new(some_field: 'totally not acceptable'')
 
 #returns true
-SomeCanonicalModel.is_canonical_for?(equivocal)
+SomeCanonicalModel.is_canonical_for?(equivocal_model)
 
 #returns false
 SomeCanonicalModel.is_canonical_for?(not_equivocal)
